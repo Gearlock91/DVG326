@@ -1,39 +1,33 @@
 package alarmKlocka.lab3.view;
 
-import javax.swing.JFrame;
+
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
-import alarmKlocka.lab2.alarm.AlarmType;
-import alarmKlocka.lab2.clock.AlarmClockType;
+@SuppressWarnings("deprecation")
+public class AlarmPopUp  implements Observer, Runnable {
 
-public class AlarmPopUp  implements Runnable {
-
-	private AlarmClockType clock;
-	private JFrame parent;
 	
-	public AlarmPopUp(AlarmClockType clock, JFrame parent) {
-		this.clock = clock;
+	private JPanel parent;
+	
+	public AlarmPopUp( JPanel parent) {
 		this.parent = parent;
 	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		Thread thread = new Thread(this);
+		
+		thread.start();
 	
+	}
+
 	@Override
 	public void run() {
-		
-		while(true) {
-			
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(!this.clock.getAlarms().isEmpty()) {	
-				for(AlarmType a : this.clock.getAlarms()) {
-					if(a.toString().equals(this.clock.getTime().toString()) && a.isActive() == true)
-						JOptionPane.showMessageDialog(parent, "Alarm!", "Alarm", 1);;
-				}	
-			}
-		}	
+		JOptionPane.showMessageDialog(parent, "Alarm!", "Alarm", 1);	
 	}
 
 }

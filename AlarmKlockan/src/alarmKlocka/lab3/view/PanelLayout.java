@@ -25,6 +25,7 @@ public class PanelLayout extends JPanel {
 	private ClockTabLayouts 		 clockDrawn;
 	private DefaultListModel<String> listModel;
 	private JList<String> 			 list;
+	private AlarmPopUp popUp;
 	
 	
 	
@@ -33,7 +34,7 @@ public class PanelLayout extends JPanel {
 		this.clockDrawn = clockDrawn;
 		this.listModel 	= listModel;
 		this.list 		= new JList<String>(listModel);
-	
+		popUp = new AlarmPopUp(this);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(northField());
 	}
@@ -107,7 +108,7 @@ public class PanelLayout extends JPanel {
 	}
 	
 	private void addAlarmToList(String alarm) {
-		AlarmType holder = new Alarm(new Time(alarm));
+		AlarmType holder = new Alarm(new Time(alarm), popUp);
 		
 		if(!listModel.contains(holder.toString())) {
 			clock.addAlarm(holder);
@@ -122,10 +123,14 @@ public class PanelLayout extends JPanel {
 		clock.removeAlarm(selectedVal);
 	}
 	private void deactivateAlarm() {
+		
 		for(AlarmType a : clock.getAlarms()) {
 			if(a.toString().equals(list.getSelectedValue())) {
-				a.setActive(false);
+				a.setActive(false);;
+				System.out.println(a.isActive());
 			}
+			
 		}
+		
 	}
 }

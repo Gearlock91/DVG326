@@ -26,7 +26,6 @@ public class MainView extends JFrame{
 	private ClockTabLayouts  		 algClock			= new DrawAnalogClock(clock);
 	private JTabbedPane		 		 tabbedPane 		= new JTabbedPane();
 	private DefaultListModel<String> listModel 			= new DefaultListModel<String>();
-	private AlarmPopUp 				 alarmCheck;
 	
 	public MainView() throws BadTimeFormat {
 		super("Alarmclock");
@@ -48,11 +47,6 @@ public class MainView extends JFrame{
 		tabbedPane.addTab("Digital clock", new PanelLayout(listModel,digClock,clock));
 		tabbedPane.addTab("Analog clock",  new PanelLayout(listModel,algClock,clock));
 		
-		//Problem med tråden i AlarmPopUp eftersom om den endast frågar hela tiden blir svaret oberäkneligt, därför
-		//finns en sleep i AlarmPopUp som reglerar hastigheten.
-		this.alarmCheck    = new AlarmPopUp(this.clock,this);
-		Thread alarmThread = new Thread(this.alarmCheck);
-		alarmThread.start();
 	}
 	
 }

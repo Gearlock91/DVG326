@@ -1,22 +1,27 @@
 package alarmKlocka.lab2.alarm;
 
-import alarmKlocka.lab2.time.TimeType;
 
-public class Alarm implements AlarmType
+import java.util.Observable;
+
+import alarmKlocka.lab2.time.TimeType;
+import alarmKlocka.lab3.view.AlarmPopUp;
+
+@SuppressWarnings("deprecation")
+public class Alarm  extends Observable implements AlarmType
   {
   private boolean active;
   private TimeType time;
   
-  public Alarm(TimeType time)
+  public Alarm(TimeType time, AlarmPopUp o)
     {
     setTime(time);
     active = true;
+    addObserver(o);
     }
   
   @Override
   public void setActive(boolean active)
     {
-	  if(!this.active)
 		  this.active = active; 
     }
 
@@ -41,8 +46,9 @@ public class Alarm implements AlarmType
   @Override
   public void doAlarm()
     {
-    if(this.active)
-    	System.err.println("Alarm! " + time.toString());
+	  if(this.active)
+		setChanged();
+    	notifyObservers();
     }
   
   public String toString()

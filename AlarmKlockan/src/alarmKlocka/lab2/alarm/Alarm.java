@@ -4,7 +4,6 @@ package alarmKlocka.lab2.alarm;
 import java.util.Observable;
 
 import alarmKlocka.lab2.time.TimeType;
-import alarmKlocka.lab3.view.AlarmPopUp;
 
 @SuppressWarnings("deprecation")
 public class Alarm  extends Observable implements AlarmType
@@ -12,11 +11,11 @@ public class Alarm  extends Observable implements AlarmType
   private boolean active;
   private TimeType time;
   
-  public Alarm(TimeType time, AlarmPopUp o)
+  public Alarm(TimeType time)
     {
     setTime(time);
     active = true;
-    addObserver(o);
+
     }
   
   @Override
@@ -55,4 +54,5 @@ public class Alarm  extends Observable implements AlarmType
     {
 	  return time.toString();
     }
+
   }

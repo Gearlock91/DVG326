@@ -108,7 +108,8 @@ public class PanelLayout extends JPanel {
 	}
 	
 	private void addAlarmToList(String alarm) {
-		AlarmType holder = new Alarm(new Time(alarm), popUp);
+		AlarmType holder = new Alarm(new Time(alarm));
+		holder.addObserver(popUp);
 		
 		if(!listModel.contains(holder.toString())) {
 			clock.addAlarm(holder);

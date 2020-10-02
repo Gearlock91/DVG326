@@ -71,7 +71,7 @@ public class DrawAnalogClock extends JPanel implements ClockTabLayouts{
 	}
 
 	@Override
-	public void reSuperPaint() {
+	public void paintClock() {
 		this.hourAngle  = threePiDivideByTwo + (2*Math.PI)/12 * clock.getTime().getHour();
 		this.minAngle 	= threePiDivideByTwo + (2*Math.PI)/60 * clock.getTime().getMinute();
 		this.secAngle 	= threePiDivideByTwo + (2*Math.PI)/60 * clock.getTime().getSecond();

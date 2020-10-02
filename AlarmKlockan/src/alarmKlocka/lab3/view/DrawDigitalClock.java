@@ -20,7 +20,7 @@ public class DrawDigitalClock extends JPanel implements ClockTabLayouts{
 		this.setBackground(Color.black);
 	}
 	
-	public void reSuperPaint() {
+	public void paintClock() {
 		repaint();
 	}
 	

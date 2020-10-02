@@ -37,8 +37,8 @@ public class MainView extends JFrame{
 		
 		Timer timer = new Timer(1000, e -> {
 			clock.tickTack();
-			digClock.reSuperPaint();
-			algClock.reSuperPaint();
+			digClock.paintClock();
+			algClock.paintClock();
 		});
 		
 		timer.start();

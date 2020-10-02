@@ -6,5 +6,5 @@ public interface ClockTabLayouts {
 	final int delay = 1000;
 	
 	public void paintComponent(Graphics g);
-	public void reSuperPaint();
+	public void paintClock();
 }

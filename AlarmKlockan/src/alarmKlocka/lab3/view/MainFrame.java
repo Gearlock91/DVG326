@@ -14,7 +14,7 @@ import alarmKlocka.lab2.clock.BadTimeFormat;
 import alarmKlocka.lab2.clock.WeekAlarmClock;
 import alarmKlocka.lab2.time.Time;
 
-public class MainView extends JFrame{
+public class MainFrame extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,7 +27,7 @@ public class MainView extends JFrame{
 	private JTabbedPane		 		 tabbedPane 		= new JTabbedPane();
 	private DefaultListModel<String> listModel 			= new DefaultListModel<String>();
 	
-	public MainView() throws BadTimeFormat {
+	public MainFrame() throws BadTimeFormat {
 		super("Alarmclock");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(width, height);
@@ -44,8 +44,8 @@ public class MainView extends JFrame{
 		timer.start();
 
 		this.add(tabbedPane);
-		tabbedPane.addTab("Digital clock", new PanelLayout(listModel,digClock,clock));
-		tabbedPane.addTab("Analog clock",  new PanelLayout(listModel,algClock,clock));
+		tabbedPane.addTab("Digital clock", new PanelView(listModel,digClock,clock));
+		tabbedPane.addTab("Analog clock",  new PanelView(listModel,algClock,clock));
 		
 	}
 	

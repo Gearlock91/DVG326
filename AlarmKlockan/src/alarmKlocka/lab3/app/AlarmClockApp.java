@@ -3,7 +3,7 @@ package alarmKlocka.lab3.app;
 import javax.swing.SwingUtilities;
 
 import alarmKlocka.lab2.clock.BadTimeFormat;
-import alarmKlocka.lab3.view.MainView;
+import alarmKlocka.lab3.view.MainFrame;
 
 public class AlarmClockApp {
 	
@@ -11,7 +11,7 @@ public class AlarmClockApp {
 		
 		SwingUtilities.invokeLater(() -> {
 			try {
-				new MainView();
+				new MainFrame();
 			} catch (BadTimeFormat e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

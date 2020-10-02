@@ -15,7 +15,6 @@ public class Alarm  extends Observable implements AlarmType
     {
     setTime(time);
     active = true;
-
     }
   
   @Override

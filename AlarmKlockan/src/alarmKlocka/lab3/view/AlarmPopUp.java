@@ -20,7 +20,6 @@ public class AlarmPopUp  implements Observer, Runnable {
 	@Override
 	public void update(Observable o, Object arg) {
 		Thread thread = new Thread(this);
-		
 		thread.start();
 	}
 

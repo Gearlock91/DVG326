@@ -1,7 +1,6 @@
 package alarmKlocka.lab3.view;
 
 import java.awt.GridLayout;
-import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -47,20 +46,15 @@ public class ButtonView  extends JPanel  {
 		JButton debugAlarm 	  	= new JButton("[Debug]Check Alarm");
 		JButton removeAlarm   	= new JButton("Remove Alarm");
 		JButton syncClock 	 	= new JButton("Sync Clock");
-		
-	
-	
-	
-			setTime.addActionListener       (e -> {setTimeOnClock();});
-			addAlarm.addActionListener      (e -> {addAlarmToList(JOptionPane.showInputDialog("SetAlarm"));});
-			removeAlarm.addActionListener   (e -> {removeAlarmFromList();});
-			deactivateAlrm.addActionListener(e -> {setActiveAlarm(false);});	
-			debugAlarm.addActionListener	(e -> {System.out.println(clock.getAlarms());});
-			rmAllAlrm.addActionListener		(e -> {listModel.removeAllElements();clock.getAlarms().clear();} ); 
-			syncClock.addActionListener		(e -> {syncronizeClock();});
-			activateAlarm.addActionListener (e -> {setActiveAlarm(true);});
-		
-		
+
+		setTime.addActionListener       (e -> {setTimeOnClock();});
+		addAlarm.addActionListener      (e -> {addAlarmToList(JOptionPane.showInputDialog("SetAlarm"));});
+		removeAlarm.addActionListener   (e -> {removeAlarmFromList();});
+		deactivateAlrm.addActionListener(e -> {setActiveAlarm(false);});	
+		debugAlarm.addActionListener	(e -> {System.out.println(clock.getAlarms());});
+		rmAllAlrm.addActionListener		(e -> {listModel.removeAllElements();clock.getAlarms().clear();} ); 
+		syncClock.addActionListener		(e -> {syncronizeClock();});
+		activateAlarm.addActionListener (e -> {setActiveAlarm(true);});
 		
 		bField.add(debugAlarm);
 		bField.add(activateAlarm);
@@ -70,7 +64,6 @@ public class ButtonView  extends JPanel  {
 		bField.add(addAlarm);
 		bField.add(rmAllAlrm);
 		bField.add(removeAlarm);
-		
 		
 		return bField;
 	}

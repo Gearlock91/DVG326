@@ -47,7 +47,7 @@ public class ButtonView  extends JPanel  {
 		JButton syncClock 	 	= new JButton("Sync Clock");
 
 		setTime.addActionListener       (e -> {setTimeOnClock();});
-		addAlarm.addActionListener      (e -> {addAlarmToList(JOptionPane.showInputDialog("SetAlarm"));});
+		addAlarm.addActionListener      (e -> {addAlarmToList(JOptionPane.showInputDialog("Set Alarm \nFormat: Mon 12:30:00"));});
 		removeAlarm.addActionListener   (e -> {removeAlarmFromList();});
 		deactivateAlrm.addActionListener(e -> {setActiveAlarm(false);});	
 		debugAlarm.addActionListener	(e -> {System.out.println(clock.getAlarms());});
@@ -66,23 +66,30 @@ public class ButtonView  extends JPanel  {
 	}
 	private void setTimeOnClock() {
 		try {
-			clock.setTime(new Time(JOptionPane.showInputDialog("Set the current Time")));
+			String time = JOptionPane.showInputDialog("Set the current Time. \nFormat: Mon 12:30:00");
+			if(time != null) {
+				clock.setTime(new Time(time));
+			}
 		} catch (BadTimeFormat e) {
 			JOptionPane.showMessageDialog(this, "Wrong input! Format: Mon 12:30:00", "Invalid time format", 0);
+			setTimeOnClock();
 		}
 	}
 	
 	private void addAlarmToList(String alarm) {
 		AlarmType holder;
 		try {
-			holder = new Alarm(new Time(alarm));
-			holder.addObserver(popUp);
-			if(!listModel.contains(holder.toString())) {
-				clock.addAlarm(holder);
-				listModel.addElement(holder.toString());
+			if(alarm != null) {
+				holder = new Alarm(new Time(alarm));
+				holder.addObserver(popUp);
+				if(!listModel.contains(holder.toString())) {
+					clock.addAlarm(holder);
+					listModel.addElement(holder.toString());
+				}
 			}
 		} catch (BadTimeFormat e) {
 			JOptionPane.showMessageDialog(this, "Wrong input! Format: Mon 12:30:00", "Invalid time format", 0);
+			addAlarmToList(JOptionPane.showInputDialog("Set Alarm \nFormat: Mon 12:30:00"));
 		}
 	}
 	

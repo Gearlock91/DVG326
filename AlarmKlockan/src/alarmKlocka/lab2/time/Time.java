@@ -33,7 +33,7 @@ public class Time implements TimeType
     	}
     }
 
-  public Time(String time)
+  public Time(String time) throws BadTimeFormat
     {
     // kolla format Hh:Mm:Ss (H: 0-2, h: 0-9, M: 0-5, m: 0-9, S: 0-5, s: 0-9) 
     Pattern plainPattern = Pattern.compile("^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$");
@@ -59,7 +59,7 @@ public class Time implements TimeType
       setSecond(Integer.parseInt(parts[2]));
       }
     else
-      throw new RuntimeException("Illegal time format: " + time);
+      throw new BadTimeFormat("Illegal time format: " + time);
     }
 
   public int getSecond()

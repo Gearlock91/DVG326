@@ -1,6 +1,7 @@
 package alarmKlocka.lab3.view;
 
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -14,9 +15,10 @@ import javax.swing.JPanel;
 import alarmKlocka.lab2.alarm.Alarm;
 import alarmKlocka.lab2.alarm.AlarmType;
 import alarmKlocka.lab2.clock.AlarmClockType;
+import alarmKlocka.lab2.clock.BadTimeFormat;
 import alarmKlocka.lab2.time.Time;
 
-public class ButtonView extends JPanel {
+public class ButtonView  extends JPanel  {
 
 	private static final long serialVersionUID = 1L;
 	private AlarmClockType			 clock;
@@ -28,7 +30,7 @@ public class ButtonView extends JPanel {
 		add(addButtonHandler(clock,popUp,listModel,list));
 	}
 
-	public JPanel addButtonHandler(AlarmClockType clock, AlarmPopUp popUp, DefaultListModel<String> listModel, JList<String> list) {
+	public JPanel addButtonHandler(AlarmClockType clock, AlarmPopUp popUp, DefaultListModel<String> listModel, JList<String> list){
 		
 		this.popUp = popUp;
 		this.clock = clock;
@@ -46,16 +48,19 @@ public class ButtonView extends JPanel {
 		JButton removeAlarm   	= new JButton("Remove Alarm");
 		JButton syncClock 	 	= new JButton("Sync Clock");
 		
-		SimpleDateFormat format = new SimpleDateFormat("E H:m:s", Locale.ENGLISH);
+	
+	
+	
+			setTime.addActionListener       (e -> {setTimeOnClock();});
+			addAlarm.addActionListener      (e -> {addAlarmToList(JOptionPane.showInputDialog("SetAlarm"));});
+			removeAlarm.addActionListener   (e -> {removeAlarmFromList();});
+			deactivateAlrm.addActionListener(e -> {setActiveAlarm(false);});	
+			debugAlarm.addActionListener	(e -> {System.out.println(clock.getAlarms());});
+			rmAllAlrm.addActionListener		(e -> {listModel.removeAllElements();clock.getAlarms().clear();} ); 
+			syncClock.addActionListener		(e -> {syncronizeClock();});
+			activateAlarm.addActionListener (e -> {setActiveAlarm(true);});
 		
-		setTime.addActionListener(	  	 e -> {clock.setTime(new Time(JOptionPane.showInputDialog("Set the current Time")));});
-		addAlarm.addActionListener(	  	 e -> {addAlarmToList(JOptionPane.showInputDialog("SetAlarm"));});
-		removeAlarm.addActionListener(	 e -> {removeAlarmFromList();});
-		deactivateAlrm.addActionListener(e -> {setActiveAlarm(false);});	
-		debugAlarm.addActionListener(	 e -> {System.out.println(clock.getAlarms());});
-		rmAllAlrm.addActionListener(     e -> {listModel.removeAllElements();clock.getAlarms().clear();} ); 
-		syncClock.addActionListener(     e -> {clock.setTime(new Time(format.format((new Date(System.currentTimeMillis())))));});
-		activateAlarm.addActionListener( e -> {setActiveAlarm(true);});
+		
 		
 		bField.add(debugAlarm);
 		bField.add(activateAlarm);
@@ -66,15 +71,28 @@ public class ButtonView extends JPanel {
 		bField.add(rmAllAlrm);
 		bField.add(removeAlarm);
 		
+		
 		return bField;
 	}
+	private void setTimeOnClock() {
+		try {
+			clock.setTime(new Time(JOptionPane.showInputDialog("Set the current Time")));
+		} catch (BadTimeFormat e) {
+			JOptionPane.showMessageDialog(this, "Wrong input! Format: Mon 12:30:00", "Invalid time format", 0);
+		}
+	}
+	
 	private void addAlarmToList(String alarm) {
-		AlarmType holder = new Alarm(new Time(alarm));
-		holder.addObserver(popUp);
-		
-		if(!listModel.contains(holder.toString())) {
-			clock.addAlarm(holder);
-			listModel.addElement(holder.toString());
+		AlarmType holder;
+		try {
+			holder = new Alarm(new Time(alarm));
+			holder.addObserver(popUp);
+			if(!listModel.contains(holder.toString())) {
+				clock.addAlarm(holder);
+				listModel.addElement(holder.toString());
+			}
+		} catch (BadTimeFormat e) {
+			JOptionPane.showMessageDialog(this, "Wrong input! Format: Mon 12:30:00", "Invalid time format", 0);
 		}
 	}
 	
@@ -91,5 +109,14 @@ public class ButtonView extends JPanel {
 				System.out.println(a.isActive());
 			}
 		}	
+	}
+	
+	private void syncronizeClock() {
+		SimpleDateFormat format = new SimpleDateFormat("E H:m:s", Locale.ENGLISH);
+		try {
+			clock.setTime(new Time(format.format((new Date(System.currentTimeMillis())))));
+		} catch (BadTimeFormat e) {
+			
+		}
 	}
 }

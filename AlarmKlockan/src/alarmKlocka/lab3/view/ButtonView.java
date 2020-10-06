@@ -86,6 +86,7 @@ public class ButtonView  extends JPanel  {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void removeAlarmFromList() {
 		for(Object a : list.getSelectedValues()) {
 			String selectedVal = (String) a;

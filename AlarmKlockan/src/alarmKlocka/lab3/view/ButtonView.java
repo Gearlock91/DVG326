@@ -42,7 +42,6 @@ public class ButtonView  extends JPanel  {
 		JButton addAlarm 	  	= new JButton("Add Alarm");
 		JButton activateAlarm 	= new JButton("Activate Alarm");
 		JButton deactivateAlrm	= new JButton("Deactivate Alarm");
-		JButton rmAllAlrm 	  	= new JButton("Remove all Alarms");
 		JButton debugAlarm 	  	= new JButton("[Debug]Check Alarm");
 		JButton removeAlarm   	= new JButton("Remove Alarm");
 		JButton syncClock 	 	= new JButton("Sync Clock");
@@ -52,7 +51,6 @@ public class ButtonView  extends JPanel  {
 		removeAlarm.addActionListener   (e -> {removeAlarmFromList();});
 		deactivateAlrm.addActionListener(e -> {setActiveAlarm(false);});	
 		debugAlarm.addActionListener	(e -> {System.out.println(clock.getAlarms());});
-		rmAllAlrm.addActionListener		(e -> {listModel.removeAllElements();clock.getAlarms().clear();} ); 
 		syncClock.addActionListener		(e -> {syncronizeClock();});
 		activateAlarm.addActionListener (e -> {setActiveAlarm(true);});
 		
@@ -62,7 +60,6 @@ public class ButtonView  extends JPanel  {
 		bField.add(deactivateAlrm);
 		bField.add(syncClock);
 		bField.add(addAlarm);
-		bField.add(rmAllAlrm);
 		bField.add(removeAlarm);
 		
 		return bField;
@@ -90,10 +87,11 @@ public class ButtonView  extends JPanel  {
 	}
 	
 	private void removeAlarmFromList() {
-		String selectedVal = list.getSelectedValue();
-		
-		listModel.removeElementAt(list.getSelectedIndex());
-		clock.removeAlarm(selectedVal);
+		for(Object a : list.getSelectedValues()) {
+			String selectedVal = (String) a;
+			listModel.removeElementAt(list.getSelectedIndex());
+			clock.removeAlarm(selectedVal);
+		}
 	}
 	private void setActiveAlarm(Boolean setActive) {
 		for(AlarmType a : clock.getAlarms()) {

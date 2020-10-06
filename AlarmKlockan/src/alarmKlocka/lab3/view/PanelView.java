@@ -57,7 +57,7 @@ public class PanelView extends JPanel {
 	private  JPanel alarmList() {
 		JPanel alarmList = new JPanel();
 		alarmList.setLayout(new GridLayout(1,1));
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setSelectedIndex(0);
 		list.setVisibleRowCount(5);

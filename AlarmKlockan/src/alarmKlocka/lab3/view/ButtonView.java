@@ -46,7 +46,7 @@ public class ButtonView  extends JPanel  {
 		JButton removeAlarm   	= new JButton("Remove Alarm");
 		JButton syncClock 	 	= new JButton("Sync Clock");
 
-		setTime.addActionListener       (e -> {setTimeOnClock();});
+		setTime.addActionListener       (e -> {setTimeOnClock(JOptionPane.showInputDialog("Set the current Time. \nFormat: Mon 12:30:00"));});
 		addAlarm.addActionListener      (e -> {addAlarmToList(JOptionPane.showInputDialog("Set Alarm \nFormat: Mon 12:30:00"));});
 		removeAlarm.addActionListener   (e -> {removeAlarmFromList();});
 		deactivateAlrm.addActionListener(e -> {setActiveAlarm(false);});	
@@ -64,15 +64,22 @@ public class ButtonView  extends JPanel  {
 		
 		return bField;
 	}
-	private void setTimeOnClock() {
+	private void setTimeOnClock(String time) {
 		try {
-			String time = JOptionPane.showInputDialog("Set the current Time. \nFormat: Mon 12:30:00");
 			if(time != null) {
-				clock.setTime(new Time(time));
+				
+					if(time.length() > 8) {
+						clock.setTime(new Time(time));
+					}
+					else if(time.length() == 8)
+						clock.setTime(new Time(clock.getTime().getDay(),Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(3, 5)), Integer.parseInt(time.substring(6, 8)) ));
+					else {
+						throw new BadTimeFormat("");
+					}
 			}
 		} catch (BadTimeFormat e) {
 			JOptionPane.showMessageDialog(this, "Wrong input! Format: Mon 12:30:00", "Invalid time format", 0);
-			setTimeOnClock();
+			setTimeOnClock(JOptionPane.showInputDialog("Set the current Time. \nFormat: Mon 12:30:00"));
 		}
 	}
 	

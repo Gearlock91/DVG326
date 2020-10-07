@@ -30,7 +30,7 @@ public class DrawDigitalClock extends JPanel implements ClockTabLayouts{
 		int y = getHeight() /2;
 		
 		g.setColor(Color.red);
-		g.setFont(new Font("TimesRoman", Font.PLAIN,  30)); // Tagen utifrån exemplet http://www.java2s.com/Tutorials/Java/java.awt/Graphics/Java_Graphics_setFont_Font_font_.htm 
+		g.setFont(new Font("TimesRoman", Font.PLAIN,  30)); 
 		g.drawString(new SimpleDateFormat("YYYY-MM-dd").format(new Date(System.currentTimeMillis())).toString(),110,y);
 		g.drawString(clock.getTime().toString(), 108, y - 40);
 	}

@@ -77,8 +77,6 @@ public class DrawAnalogClock extends JPanel implements ClockTabLayouts{
 		this.secAngle 	= threePiDivideByTwo + (2*Math.PI)/60 * clock.getTime().getSecond();
 		repaint();	
 	}
-	
-	
 }
 
 

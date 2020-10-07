@@ -8,7 +8,6 @@ import alarmKlocka.lab3.view.MainFrame;
 public class AlarmClockApp {
 	
 	public static void main(String args[]) {
-		
 		SwingUtilities.invokeLater(() -> {
 			try {
 				new MainFrame();

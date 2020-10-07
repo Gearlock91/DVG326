@@ -31,10 +31,10 @@ public class ButtonView  extends JPanel  {
 
 	public JPanel addButtonHandler(AlarmClockType clock, AlarmPopUp popUp, DefaultListModel<String> listModel, JList<String> list){
 		
-		this.popUp = popUp;
-		this.clock = clock;
-		this.list  = list;
-		this.listModel = listModel;
+		this.popUp 		= popUp;
+		this.clock		= clock;
+		this.list  		= list;
+		this.listModel 	= listModel;
 		
 		JPanel bField = new JPanel();
 		bField.setLayout(new GridLayout(6,2));

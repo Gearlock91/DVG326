@@ -19,8 +19,8 @@ public class PanelView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private ClockTabLayouts 		 clockDrawn;
 	private JList<String> 			 list;
-	private AlarmPopUp popUp;
-	private ButtonView bHandler;
+	private AlarmPopUp 				 popUp;
+	private ButtonView 			     bHandler;
 
 	public PanelView(DefaultListModel<String> listModel,ClockTabLayouts clockDrawn, AlarmClockType clock) {
 

@@ -1,6 +1,8 @@
 # DVG326
 Alarmklockan
 
+Version 1.0
+
 En alarmklocka som har byggts upp under kursens gång.
 
 Lite snabba funktions beskrivningar:
